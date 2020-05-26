@@ -37,9 +37,9 @@ def ask_for_current_spending(user_name):
 		'housing': '(rent, mortgage, etc)' ,
 		'utilities': '(cell phone, internet, etc)',
 		'food': '(groceries, restaurants, etc)',
-		'transportation': '(cell phone, internet, etc)',
-		'entertainment': '(cell phone, internet, etc)',
-		'personal': '(cell phone, internet, etc)'
+		'transportation': '(gas, public transit, etc)',
+		'entertainment': '(travel, subscription services, etc)',
+		'personal': '(clothing, gifts, etc)'
 	}
 
 	for category, spending_amt in current_spending.items():
@@ -78,8 +78,42 @@ def get_user_saving(user_name, total_current_spending):
 	print("that means your new budget will total to " + user_new_budget + '!')
 	return user_saving
 
+
+def are_all_categories_listed(user_ranking_list):
+	original_category_list = ['housing', 'utilities', 'food', 'transportation', 'entertainment', 'personal']
+	
+	if set(user_ranking_list) == set(original_category_list):
+		return True
+	else:
+		return False
+
+
+def parse_user_ranking(user_ranking):
+	user_ranking = user_ranking.lower()
+	user_ranking = user_ranking.replace(" ", "")
+
+	ranking_list = user_ranking.split(",")
+	return ranking_list
+
+
 def get_user_ranking():
-	pass 
+	print("To help me finalize your new budget breakdown, could you rank your categories from LEAST flexible to MOST flexible?")
+	print("Do not number each category and separate each category with a comma.")
+	print("For your convenience, the 6 categories are housing, utilities, food, transportation, entertainment, and personal.")
+	print("Here is an example ranking input: transportation, housing, utilities, entertainment, food, personal")
+	
+	user_ranking = input("Type out your ranking here: ")
+	ranking_list = parse_user_ranking(user_ranking) 
+	
+	while are_all_categories_listed(ranking_list) == False:
+		print("I'm sorry but I couldn't understand...")
+		print("Please remember to separate each category w/ a comma and spell each category exactly as I've listed above")
+		print("Here is an example ranking: transportation, housing, utilities, entertainment, food, personal")
+
+		user_ranking = input("Please retype your ranking here: ")
+		ranking_list = parse_user_ranking(user_ranking) 
+
+	return ranking_list
 
 
 def start_program():
@@ -87,8 +121,12 @@ def start_program():
 	current_spending = ask_for_current_spending(user_name)
 	total_current_spending = calculate_total_spending(user_name, current_spending)
 	user_desired_saving = get_user_saving(user_name, total_current_spending)
-	user_category_ranking = get_user_ranking()
+	user_category_ranking = get_user_ranking() 
+	#Now, use desired saving and go through current spending list in the order of category ranking reversed to cut spending
+	# 0%, 0%, 0%, 20%, 35%,  45%
 
 #start_program()
+#print(is_ranking_valid('hi, Alvin, game'))
+print(get_user_ranking())
 
 	
