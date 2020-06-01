@@ -15,6 +15,21 @@ def say_intro_get_name():
 
 
 def is_number_valid(input_value):
+	"""Add two numbers together. 
+    
+    Parameters
+    ----------
+    num1 : int or float
+        The first number, to be added. 
+    num2 : int or float
+        The second number, to be added.
+    
+    Returns
+    -------
+    answer : float
+        The result of the addition. 
+    """
+    
 	if input_value.isnumeric():
 		return True
 
