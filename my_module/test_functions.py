@@ -4,17 +4,15 @@ Note: because these are 'empty' functions (return None), here we just test
   that the functions execute, and return None, as expected.
 """
 
-from functions import my_func, my_other_func
+from functions import is_number_valid
 ##
 ##
 
-def test_my_func():
+def test_is_number_valid():
 
-    assert my_func() == None
+    assert is_number_valid('4') == True
+    
 
-def test_my_other_func():
-
-    assert my_other_func() == None
     
 
 
