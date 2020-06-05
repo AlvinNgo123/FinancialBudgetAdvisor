@@ -2,6 +2,17 @@
 import time
 
 def say_intro_get_name():
+	"""Print out introduction and get user's name from their input. 
+    
+    Parameters
+    ----------
+    None
+    
+    Returns
+    -------
+    name : string
+        The name that the user inputs. 
+    """
 	print('Hi, my name is Vifa and I will be your virtual financial advisor!')
 	time.sleep(1)
 	print('My goal is to help you come up with a financial plan based on your current spending and your desired spending.')
@@ -15,21 +26,19 @@ def say_intro_get_name():
 
 
 def is_number_valid(input_value):
-	"""Add two numbers together. 
+	"""Checks to see if user's input is actually a valid spending number (int or float)
     
     Parameters
     ----------
-    num1 : int or float
-        The first number, to be added. 
-    num2 : int or float
-        The second number, to be added.
+    input_value : string
+        The user's input that needs to be checked. 
     
     Returns
     -------
-    answer : float
-        The result of the addition. 
+    boolean
+        Whether or not the input string can be converted to a float 
     """
-    
+
 	if input_value.isnumeric():
 		return True
 
@@ -41,6 +50,18 @@ def is_number_valid(input_value):
 
 
 def ask_for_current_spending(user_name):
+	"""Gets the user's spending amounts for each category and stores them in a dictionary 
+    
+    Parameters
+    ----------
+    user_name : string
+        The name of the user (used for more personalized print statements). 
+    
+    Returns
+    -------
+    current_spending : dictionary
+        Keys represent the spending category (str) and Values represent the spending amt (str) in that category. 
+    """
 	current_spending = {
 		'housing': None,
 		'utilities': None,
@@ -73,6 +94,20 @@ def ask_for_current_spending(user_name):
 
 
 def calculate_total_spending(user_name, current_spending):
+	"""Sums up all the spending amounts to give user their total monthly spending. 
+    
+    Parameters
+    ----------
+    user_name : string
+        The name of the user (used for more personalized print statements) 
+    current_spending : dictionary
+        Keys represent the spending category (str) and Values represent the spending amt (str) in that category.
+    
+    Returns
+    -------
+    total_spending_amount : float
+        The result from summing up all the spending amts in every category. 
+    """
 	total_spending = 0
 	for category, spending_amt in current_spending.items():
 		total_spending += float(spending_amt)
@@ -85,6 +120,18 @@ def calculate_total_spending(user_name, current_spending):
 
 
 def is_saving_valid(user_saving_response):
+	"""Check to make sure that the user selected a valid saving choice. 
+    
+    Parameters
+    ----------
+    user_saving_response : string
+        What the user typed in as their response. 
+    
+    Returns
+    -------
+    boolean
+        Whether or not input was a valid value (should be 1, 2, or 3). 
+    """
 	if user_saving_response.isnumeric() == False:
 		return False
 
@@ -101,6 +148,18 @@ def is_saving_valid(user_saving_response):
 
 
 def get_user_saving(user_name):
+	"""Asks the user to choose how much they want to adjust the budget and gets their choice. 
+    
+    Parameters
+    ----------
+    user_name : string
+        The name of the user (used for more personalized print statements). 
+    
+    Returns
+    -------
+    user_saving: string
+        Value that user inputted as their savings intensity choice. 
+    """
 	print("How much savings do you want for this new budget?")
 	time.sleep(1)
 	print("1 = Conservative, 2 = Moderate, 3 = Intense")
@@ -120,6 +179,18 @@ def get_user_saving(user_name):
 
 
 def are_all_categories_listed(user_ranking_list):
+	"""Checks to see if user's ranking list contains all the categories. 
+    
+    Parameters
+    ----------
+    user_ranking_list : list
+        List that contains user's rankings of category based on priority. 
+    
+    Returns
+    -------
+    boolean
+        Whether or not list contains all categories. 
+    """
 	original_category_list = ['housing', 'utilities', 'food', 'transportation', 'entertainment', 'personal']
 	
 	if set(user_ranking_list) == set(original_category_list):
@@ -129,6 +200,18 @@ def are_all_categories_listed(user_ranking_list):
 
 
 def parse_user_ranking(user_ranking):
+	"""Parses user's input and converts it to a ranking list. 
+    
+    Parameters
+    ----------
+    user_ranking : string
+        User's input that needs to be parsed. 
+    
+    Returns
+    -------
+    ranking_list : list
+        Category ranking list that results from parsing user's input. 
+    """
 	user_ranking = user_ranking.lower()
 	user_ranking = user_ranking.replace(" ", "")
 
@@ -137,6 +220,17 @@ def parse_user_ranking(user_ranking):
 
 
 def get_user_ranking():
+	"""Asks the user to rank the spending categories from least to most flexible. 
+    
+    Parameters
+    ----------
+    None
+    
+    Returns
+    -------
+    ranking_list : list
+        User's ranking list of the spending categories. 
+    """
 	print("To help me finalize your new budget breakdown, could you rank your categories from LEAST flexible to MOST flexible?")
 	time.sleep(1)
 	print("Do not number each category and separate each category with a comma.")
@@ -164,6 +258,22 @@ def get_user_ranking():
 
 
 def calculate_new_budget(user_category_ranking, user_desired_saving, current_spending):
+	"""Utilzies the user's rankings, savings intensity choice, and current spending amts to create a new budget. 
+    
+    Parameters
+    ----------
+    user_category_ranking : list
+        User's ranking list of the spending categories. 
+    user_desired_saving : string
+        Value that user inputted as their savings intensity choice.
+    current_spending : dictionary
+        Keys represent the spending category (str) and Values represent the spending amt (str) in that category.   
+    
+    Returns
+    -------
+    user_new_budget : list
+        Budget that reflects the new finalized spending amounts (that include savings). 
+    """
 	adjust_percentage_1 = [0.0, 0.05, 0.05, 0.10, 0.15, 0.20] 
 	adjust_percentage_2 = [0.0, 0.05, 0.10, 0.15, 0.25, 0.35] 
 	adjust_percentage_3 = [0.0, 0.10, 0.20, 0.30, 0.40, 0.50] 
@@ -190,6 +300,20 @@ def calculate_new_budget(user_category_ranking, user_desired_saving, current_spe
 
 
 def announce_new_budget(user_category_ranking, user_new_budget):
+	"""Goes through the two lists and prints out the new budget to the user. 
+    
+    Parameters
+    ----------
+    user_category_ranking : list
+        User's ranking list of the spending categories. 
+    user_new_budget : list
+        Budget that reflects the new finalized spending amounts (that include savings).
+    
+    Returns
+    -------
+    final_budget : dictionary
+        Keys are the spending category and Values are the new adjusted spending amounts.  
+    """
 	final_budget = {}
 
 	for i in range(len(user_category_ranking)):
@@ -208,6 +332,16 @@ def announce_new_budget(user_category_ranking, user_new_budget):
 
 
 def start_program():
+	"""Script that runs the program by calling the necessary functions. 
+    
+    Parameters
+    ----------
+    None
+    
+    Returns
+    -------
+    None 
+    """
 	user_name = say_intro_get_name()
 	current_spending = ask_for_current_spending(user_name)
 	total_current_spending = calculate_total_spending(user_name, current_spending)
