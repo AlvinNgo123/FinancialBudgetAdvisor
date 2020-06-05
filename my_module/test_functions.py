@@ -4,7 +4,7 @@ Note: because these are 'empty' functions (return None), here we just test
   that the functions execute, and return None, as expected.
 """
 
-from functions import is_number_valid, is_saving_valid, are_all_categories_listed, parse_user_ranking
+from functions import is_number_valid, is_saving_valid, are_all_categories_listed, parse_user_ranking, start_program
 ##
 ##
 
@@ -47,7 +47,7 @@ def test_parse_user_ranking():
 
 
 def test_start_program():
-	
+
 	assert True
 
 
