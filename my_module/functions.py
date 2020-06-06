@@ -281,7 +281,7 @@ def calculate_new_budget(user_category_ranking, user_desired_saving, current_spe
 		decrease_amount = user_adjust_percentage[i]
 		current_category = user_category_ranking[i]
 
-		new_budget = current_spending[current_category] - (current_spending[current_category] * decrease_amount)
+		new_budget = float(current_spending[current_category]) - (float(current_spending[current_category]) * decrease_amount)
 		new_budget = round(new_budget, 2)
 
 		user_new_budget.append(new_budget)
@@ -309,7 +309,7 @@ def announce_new_budget(user_category_ranking, user_new_budget):
 	for i in range(len(user_category_ranking)):
 		final_budget[user_category_ranking[i]] = user_new_budget[i]
 
-	print("Here is your new budget!")
+	print("Alright, after taking everything into consideration...Here is your new budget breakdown!")
 	time.sleep(1)
 
 	for category, budget in final_budget.items():
