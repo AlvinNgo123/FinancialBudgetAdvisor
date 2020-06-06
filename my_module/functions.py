@@ -239,7 +239,6 @@ def get_user_ranking():
 	while are_all_categories_listed(ranking_list) == False:
 		print("I'm sorry but I couldn't understand...")
 		print("Please remember to separate each category w/ a comma and spell each category exactly as I've listed above")
-		print("Here is an example ranking: transportation, housing, utilities, entertainment, food, personal")
 		time.sleep(1)
 
 		user_ranking = input("Please retype your ranking here: ")
@@ -343,11 +342,11 @@ def start_program():
 	final_budget = announce_new_budget(user_category_ranking, user_new_budget) 
 
 
-#start_program()
-#print(is_ranking_valid('hi, Alvin, game'))
-#print(get_user_ranking())
+start_program()
+
 
 #DEBUG THIS FUNCTION
 #calculate_new_budget
+
 
 	
