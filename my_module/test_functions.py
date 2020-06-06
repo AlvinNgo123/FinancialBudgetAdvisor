@@ -157,7 +157,7 @@ def test_parse_user_ranking():
 	assert f.parse_user_ranking('a, b, cd') == ['a', 'b', 'cd']
 
 	# Test with empty string
-	assert f.parse_user_ranking('') == ['']
+	assert f.parse_user_ranking('') == [''] 
 
 
 ranking_input_1 = 'transportation, housing, utilities, entertainment, food, personal' 
@@ -185,8 +185,34 @@ def test_get_user_ranking(mock_choice):
 	assert ranking_list == ['entertainment', 'food', 'personal', 'transportation', 'housing', 'utilities']
 
 
-#def test_calculate_new_budget()
+def test_calculate_new_budget():
+	"""Tests for the calculate_new_budget function"""
 
+	category_ranking = ['housing', 'transportation', 'personal', 'entertainment', 'food', 'utilities']
+	current_spending = {
+		'housing': '450.50',
+		'transportation': '750.00',
+		'personal': '134.56',
+		'entertainment': '100.10',
+		'food': '310.00',
+		'utilities': '211.11'
+	}
+
+	# Test when user only wants conservative budget adjustment
+	user_saving_1 = '1'
+	new_budget_1 = [450.50, 712.50, 127.83, 90.09, 263.50, 168.89]
+	assert f.calculate_new_budget(category_ranking, user_saving_1, current_spending) == new_budget_1
+
+	# Test when user wants moderate budget adjustment 
+	user_saving_2 = '2'
+	new_budget_2 = [450.50, 712.50, 121.10, 85.08, 232.50, 137.22]
+	assert f.calculate_new_budget(category_ranking, user_saving_2, current_spending) == new_budget_2
+
+	# Test when user wants intense budget adjustment
+	user_saving_3 = '3'
+	new_budget_3 = [450.50, 675.00, 107.65, 70.07, 186.00, 105.56]
+	assert f.calculate_new_budget(category_ranking, user_saving_3, current_spending) == new_budget_3
+	 
 
 def test_announce_new_budget():
 	"""Tests for the announce_new_budget function"""
