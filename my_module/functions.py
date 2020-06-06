@@ -14,9 +14,7 @@ def say_intro_get_name():
         The name that the user inputs. 
     """
 	print('Hi, my name is Vifa and I will be your virtual financial advisor!')
-	time.sleep(1)
 	print('My goal is to help you come up with a financial plan based on your current spending and your desired spending.')
-	time.sleep(1)
 
 	name = str(input('Please type in your name here: '))
 	print('Nice to meet you, ' + name + "! Well, let's begin with some questions on your current spending?")
@@ -85,7 +83,6 @@ def ask_for_current_spending(user_name):
 
 		while (is_number_valid(spending_amt) == False):
 			print("Sorry, I don't understand.")
-			time.sleep(1)
 			spending_amt = input("Could you please re-enter your spending amount for " + category + " " + category_descriptions[category] + ": ")
 
 		current_spending[category] = spending_amt
@@ -161,14 +158,13 @@ def get_user_saving(user_name):
         Value that user inputted as their savings intensity choice. 
     """
 	print("How much savings do you want for this new budget?")
-	time.sleep(1)
 	print("1 = Conservative, 2 = Moderate, 3 = Intense")
+
 	time.sleep(1)
 	user_saving = input("Please enter the number that best corresponds to how much you want me to adjust the budget: ")
 
 	while(is_saving_valid(user_saving) == False):
 		print("I'm sorry " + user_name + " but I don't understand. Response should be only 1, 2, or 3")
-		time.sleep(1)
 		print("Remember that 1 = Conservative, 2 = Moderate, 3 = Intense")
 		time.sleep(1)
 		user_saving = input("Please enter the number that fits the intensity of adjustment here:  ")
@@ -232,11 +228,8 @@ def get_user_ranking():
         User's ranking list of the spending categories. 
     """
 	print("To help me finalize your new budget breakdown, could you rank your categories from LEAST flexible to MOST flexible?")
-	time.sleep(1)
 	print("Do not number each category and separate each category with a comma.")
-	time.sleep(1)
 	print("For your convenience, the 6 categories are housing, utilities, food, transportation, entertainment, and personal.")
-	time.sleep(1)
 	print("Here is an example ranking input: transportation, housing, utilities, entertainment, food, personal")
 	time.sleep(1)
 	
@@ -245,9 +238,7 @@ def get_user_ranking():
 	
 	while are_all_categories_listed(ranking_list) == False:
 		print("I'm sorry but I couldn't understand...")
-		time.sleep(1)
 		print("Please remember to separate each category w/ a comma and spell each category exactly as I've listed above")
-		time.sleep(1)
 		print("Here is an example ranking: transportation, housing, utilities, entertainment, food, personal")
 		time.sleep(1)
 
@@ -317,15 +308,16 @@ def announce_new_budget(user_category_ranking, user_new_budget):
 	final_budget = {}
 
 	for i in range(len(user_category_ranking)):
-		final_budget[user_category_ranking[i]] = user_new_budget
+		final_budget[user_category_ranking[i]] = user_new_budget[i]
 
 	print("Here is your new budget!")
 	time.sleep(1)
 
 	for category, budget in final_budget.items():
 		print(str(category) + ": " + str(budget))
-		time.sleep(1)
 
+
+	time.sleep(1)
 	print("Thank you for letting me help you save money and have a great day!")
 
 	return final_budget
