@@ -342,7 +342,7 @@ def start_program():
 	final_budget = announce_new_budget(user_category_ranking, user_new_budget) 
 
 
-start_program()
+#start_program()
 
 
 #DEBUG THIS FUNCTION
