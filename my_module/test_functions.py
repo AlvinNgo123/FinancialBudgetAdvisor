@@ -99,6 +99,58 @@ def test_parse_user_ranking():
 	assert f.parse_user_ranking('') == ['']
 
 
+ranking_input_1 = 'transportation, housing, utilities, entertainment, food, personal' 
+ranking_input_2 = 'housing, entertainment,personal, utilities,transportation, food'
+ranking_input_3 = 'Utilities, Transportation,Food, Housing,entertainment, personal'
+ranking_input_4 = 'enteR Tainment, fOod , peRsoNal, tRans PoRtAtion, HoUsin g,UTILi tIES'
+@mock.patch('functions.input', side_effect=[ranking_input_1, ranking_input_2, ranking_input_3, ranking_input_4])
+def test_get_user_ranking(mock_choice):
+
+	ranking_list = f.get_user_ranking() 
+	assert ranking_list == ['transportation', 'housing', 'utilities', 'entertainment', 'food', 'personal']
+
+	ranking_list = f.get_user_ranking()
+	assert ranking_list == ['housing', 'entertainment', 'personal', 'utilities', 'transportation', 'food']
+
+	ranking_list = f.get_user_ranking()
+	assert ranking_list == ['utilities', 'transportation', 'food', 'housing', 'entertainment', 'personal']
+
+	ranking_list = f.get_user_ranking()
+	assert ranking_list == ['entertainment', 'food', 'personal', 'transportation', 'housing', 'utilities']
+
+
+def test_announce_new_budget():
+
+	category_ranking_1 = ['transportation', 'housing', 'utilities']
+	budget_1 = [201.56, 123.56, 223.50]
+	final_budget_1 = {
+		'transportation': 201.56,
+		'housing': 123.56,
+		'utilities': 223.50
+	}
+
+	assert f.announce_new_budget(category_ranking_1, budget_1) == final_budget_1
+
+	category_ranking_2 = ['housing', 'utilities']
+	budget_2 = [201.10, 223.00]
+	final_budget_2 = {
+		'housing': 201.10,
+		'utilities': 223.00
+	}
+
+	assert f.announce_new_budget(category_ranking_2, budget_2) == final_budget_2
+
+	category_ranking_3 = ['personal']
+	budget_3 = [1000.01]
+	final_budget_3 = {
+		'personal': 1000.01
+	}
+
+	assert f.announce_new_budget(category_ranking_3, budget_3) == final_budget_3
+
+
+
+
 def test_start_program():
 
 	assert True
