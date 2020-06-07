@@ -52,7 +52,49 @@ def test_is_number_valid():
 	assert f.is_number_valid('') == False
 
 
-#def test_ask_for_current_spending: TODO
+test_1 = ['1200', '240', '111', '191', '250', '142']
+test_2 = ['1233.3', '145', '23.12', '190.011', '311.09', '1421.10']
+test_3 = ['750.00', 'a', '12.34.1' ,'100.11', '231.24', ' ', '20.20', '15.50', 'b11a', '166.12']
+test = test_1 + test_2 + test_3
+@mock.patch('functions.input', side_effect=test)
+def test_ask_for_current_spending(mock_choice):
+	"""Tests for the calculate_total_spending function"""
+	
+	# Test where user inputs only int values for spending amounts
+	current_spending_dict_1 = f.ask_for_current_spending('')
+	correct_dict_1 = {
+		'housing': '1200',
+		'utilities': '240',
+		'food': '111',
+		'transportation': '191',
+		'entertainment': '250',
+		'personal': '142' 
+	}
+	assert current_spending_dict_1 == correct_dict_1
+
+	# Test where user inputs float values of different lengths for spending amounts
+	current_spending_dict_2 = f.ask_for_current_spending('')
+	correct_dict_2 = { 
+		'housing': '1233.3',
+		'utilities': '145',
+		'food': '23.12',
+		'transportation': '190.011',
+		'entertainment': '311.09',
+		'personal': '1421.10'
+	}
+	assert current_spending_dict_2 == correct_dict_2
+
+	# Test where the user inputs invalid values and gets asked to re-type their inputs 
+	current_spending_dict_3 = f.ask_for_current_spending('')
+	correct_dict_3 = {
+		'housing': '750.00',
+		'utilities': '100.11',
+		'food': '231.24',
+		'transportation': '20.20',
+		'entertainment': '15.50',
+		'personal': '166.12'
+	}
+	assert current_spending_dict_3 == correct_dict_3
 
 
 def test_calculate_total_spending():
@@ -251,7 +293,7 @@ def test_announce_new_budget():
 def test_start_program():
 	"""Tests for the start_program function"""
 	
-	#This function is simply a script that calls all the other functions so just test the others
+	#This function is simply a script that calls all the other functions so we'll just test the others
 	assert True
 
 
