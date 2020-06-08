@@ -196,7 +196,7 @@ def are_all_categories_listed(user_ranking_list):
     """
 	original_category_list = ['housing', 'utilities', 'food', 'transportation', 'entertainment', 'personal']
 	
-	#
+	# sets allow us to compare two list for equality without taking the arrangement into account
 	if set(user_ranking_list) == set(original_category_list):
 		return True
 	else:
@@ -272,6 +272,8 @@ def calculate_new_budget(user_category_ranking, user_desired_saving, current_spe
     user_new_budget : list
         Budget that reflects the new finalized spending amounts (that include savings). 
     """
+
+    #Depending on user's saving choice, the percent to adjust their current budget changes
 	adjust_percentage_1 = [0.0, 0.05, 0.05, 0.10, 0.15, 0.20] 
 	adjust_percentage_2 = [0.0, 0.05, 0.10, 0.15, 0.25, 0.35] 
 	adjust_percentage_3 = [0.0, 0.10, 0.20, 0.30, 0.40, 0.50] 
