@@ -41,6 +41,7 @@ def is_number_valid(input_value):
 		return True
 
 	try:
+		#Checks to see if the value can be typecasted to a float. If yes, it returns True
 		check_if_float = float(input_value)
 		return True
 	except:
@@ -60,6 +61,8 @@ def ask_for_current_spending(user_name):
     current_spending : dictionary
         Keys represent the spending category (str) and Values represent the spending amt (str) in that category. 
     """
+
+   	#This dictionary is what will be populated by the user's inputs
 	current_spending = {
 		'housing': None,
 		'utilities': None,
@@ -69,6 +72,7 @@ def ask_for_current_spending(user_name):
 		'personal': None
 	}
 
+	#This dictionary is created so we can print out the descriptions in the for loop in a cleaner manner
 	category_descriptions = {
 		'housing': '(rent, mortgage, etc)' ,
 		'utilities': '(cell phone, internet, etc)',
@@ -109,6 +113,7 @@ def calculate_total_spending(user_name, current_spending):
 	for category, spending_amt in current_spending.items():
 		total_spending += float(spending_amt)
 
+	#We want to round the total_spending to two decimals so it best represents cents
 	total_spending = round(total_spending, 2)
 
 	print('Thank you, ' + user_name + '. From my calculations, it seems that your current monthly spending totals to ' + str(total_spending))
@@ -136,6 +141,7 @@ def is_saving_valid(user_saving_response):
 		possible_valid_responses = [1, 2, 3]
 		user_saving = int(user_saving_response)
 
+		#This checks to make sure that the response is 1, 2, or 3
 		if user_saving in possible_valid_responses:
 			return True
 		else:
@@ -163,6 +169,7 @@ def get_user_saving(user_name):
 	time.sleep(1)
 	user_saving = input("Please enter the number that best corresponds to how much you want me to adjust the budget: ")
 
+	#Checks to make sure user input is valid. It keeps querying the user until it is valid.
 	while(is_saving_valid(user_saving) == False):
 		print("I'm sorry " + user_name + " but I don't understand. Response should be only 1, 2, or 3")
 		print("Remember that 1 = Conservative, 2 = Moderate, 3 = Intense")
@@ -189,6 +196,7 @@ def are_all_categories_listed(user_ranking_list):
     """
 	original_category_list = ['housing', 'utilities', 'food', 'transportation', 'entertainment', 'personal']
 	
+	#
 	if set(user_ranking_list) == set(original_category_list):
 		return True
 	else:
@@ -315,7 +323,6 @@ def announce_new_budget(user_category_ranking, user_new_budget):
 	for category, budget in final_budget.items():
 		print(str(category) + ": " + str(budget))
 
-
 	time.sleep(1)
 	print("Thank you for letting me help you save money and have a great day!")
 
@@ -342,11 +349,6 @@ def start_program():
 	final_budget = announce_new_budget(user_category_ranking, user_new_budget) 
 
 
-#start_program()
-
-
-#DEBUG THIS FUNCTION
-#calculate_new_budget
 
 
 	
